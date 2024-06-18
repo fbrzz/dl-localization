@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 // Dentalink  Localization Banners
+=======
+//Dentalink Localization v.1.0.0
+>>>>>>> Stashed changes
 const banner = document.getElementById('localization-banner');
 const localizationCountries = banner.getAttribute('localization-country').split(',');
 
