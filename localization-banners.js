@@ -1,3 +1,4 @@
+// Dentalink  Localization Banners
 const banner = document.getElementById('localization-banner');
 const localizationCountries = banner.getAttribute('localization-country').split(',');
 
