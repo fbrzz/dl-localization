@@ -38,10 +38,12 @@ if (!bannerClosed) {
                 const siteCountry = localizationCountries[0];
                 if (userCountry !== siteCountry) {
                     banner.style.display = 'block';
+                    adjustNavbar();
                 }
             } else {
                 if (localizationCountries.includes(userCountry)) {
                     banner.style.display = 'block';
+                    adjustNavbar();
                 }
             }
         })
