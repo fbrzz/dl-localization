@@ -1,4 +1,4 @@
-//Dentalink Localization v.2.0.0 — Añade funciones de cierre de banner
+//Dentalink Localization v.2.0.1 — Añade funciones de cierre de banner
 function setCookie(name, value, days) {
     const d = new Date();
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -19,6 +19,7 @@ function getCookie(name) {
 
 const banner = document.getElementById('localization-banner');
 const localizationCountries = banner.getAttribute('localization-country').split(',');
+const globalNavbar = document.querySelector('.global-navbar');
 
 const closeDays = parseInt(banner.getAttribute('localization-close-days'), 10);
 const bannerClosed = getCookie('localizationBannerClosed');
@@ -52,4 +53,19 @@ if (!bannerClosed) {
 document.getElementById('localization-top-banner-close').addEventListener('click', () => {
     banner.style.display = 'none';
     setCookie('localizationBannerClosed', 'true', closeDays);
+    globalNavbar.style.top = '';
+});
+
+function adjustNavbar() {
+    if (window.innerWidth <= 479) {
+        globalNavbar.style.top = '90px';
+    } else {
+        globalNavbar.style.top = '55px';
+    }
+}
+
+window.addEventListener('resize', () => {
+    if (banner.style.display === 'block') {
+        adjustNavbar();
+    }
 });
