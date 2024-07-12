@@ -52,7 +52,8 @@ if (!bannerClosed) {
         });
 }
 
-document.getElementById('localization-top-banner-close').addEventListener('click', () => {
+document.getElementById('localization-top-banner-close').addEventListener('click', (event) => {
+    event.stopPropagation();
     banner.style.display = 'none';
     setCookie('localizationBannerClosed', 'true', closeDays);
     globalNavbar.style.top = '';
