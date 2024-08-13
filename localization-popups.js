@@ -44,10 +44,12 @@ if (!countryCode) {
     });
 
     // Asigna el evento para cerrar el popup y guardar la cookie del país actual
-    document.querySelector('.localization-close-popup').addEventListener('click', function() {
-        const userCountry = Object.keys(countryUrls).find(code => window.location.href.startsWith(countryUrls[code])) || 'latam';
-        setCookie('localization-country-code', userCountry, closeDays);
-        selectorMain.style.display = 'none';
+    document.querySelectorAll('.localization-close-popup').forEach(button => {
+        button.addEventListener('click', function() {
+            const userCountry = Object.keys(countryUrls).find(code => window.location.href.startsWith(countryUrls[code])) || 'latam';
+            setCookie('localization-country-code', userCountry, closeDays);
+            selectorMain.style.display = 'none';
+        });
     });
 
 } else {
