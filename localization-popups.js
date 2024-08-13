@@ -36,10 +36,10 @@ if (!countryCode) {
 
     // Asigna el evento a todos los enlaces con atributo "localization-country"
     document.querySelectorAll('[localization-country]').forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
+        link.addEventListener('click', function() {
             const selectedCountry = this.getAttribute('localization-country');
             setCookie('localization-country-code', selectedCountry, closeDays);
+            // La redirección ahora se manejará naturalmente por el atributo href del enlace
         });
     });
 
@@ -57,4 +57,13 @@ if (!countryCode) {
     if (countryUrls[countryCode] && !window.location.href.startsWith(countryUrls[countryCode])) {
         window.location.href = countryUrls[countryCode];
     }
+
+    // Permitir que el usuario cambie voluntariamente el país haciendo clic en los enlaces
+    document.querySelectorAll('[localization-country]').forEach(link => {
+        link.addEventListener('click', function() {
+            const selectedCountry = this.getAttribute('localization-country');
+            setCookie('localization-country-code', selectedCountry, closeDays);
+            // No preventDefault, permitiendo que el enlace redirija como lo haría naturalmente
+        });
+    });
 }
