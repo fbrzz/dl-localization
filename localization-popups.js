@@ -1,8 +1,8 @@
 const countryUrls = {
-    co: "https://www.softwaredentalink.com/co/",
-    mx: "https://www.softwaredentalink.com/mx/",
-    cl: "https://www.softwaredentalink.com/?c=cl",
-    latam: "https://www.softwaredentalink.com/"
+    co: "https://dentalink-colombia.webflow.io/",
+    mx: "https://dentalink-mexico.webflow.io/",
+    cl: "https://dentalink-latam.webflow.io/?c=cl",
+    latam: "https://dentalink-latam.webflow.io/"
 };
 
 function setCookie(name, value, days) {
@@ -23,18 +23,18 @@ function getCookie(name) {
     return null;
 }
 
-// Obtener la cookie del código de país
+// Obtiene la cookie del código de país
 const countryCode = getCookie('localization-country-code');
 
 if (!countryCode) {
-    // Mostrar el selector de país
+    // Muestra el selector de país
     const selectorMain = document.getElementById('localization-selector-main');
     selectorMain.style.display = 'flex';
 
-    // Obtener el número de días para la cookie
+    // Obtiene el número de días para la cookie
     const closeDays = parseInt(document.getElementById('localization-banner').getAttribute('localization-close-days'), 10);
 
-    // Asignar evento a todos los enlaces con atributo "localization-country"
+    // Asigna el evento a todos los enlaces con atributo "localization-country"
     document.querySelectorAll('[localization-country]').forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
@@ -43,7 +43,7 @@ if (!countryCode) {
         });
     });
 
-    // Asignar evento para cerrar el popup y guardar la cookie correspondiente al país actual
+    // Asigna el evento para cerrar el popup y guardar la cookie del país actual
     document.querySelector('.localization-close-popup').addEventListener('click', function() {
         const userCountry = Object.keys(countryUrls).find(code => window.location.href.startsWith(countryUrls[code])) || 'latam';
         setCookie('localization-country-code', userCountry, closeDays);
@@ -51,7 +51,7 @@ if (!countryCode) {
     });
 
 } else {
-    // Redirigir automáticamente al usuario si la cookie existe
+    // Redirección automática si la cookie existe
     if (countryUrls[countryCode] && !window.location.href.startsWith(countryUrls[countryCode])) {
         window.location.href = countryUrls[countryCode];
     }
