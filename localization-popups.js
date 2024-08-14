@@ -39,7 +39,6 @@ if (!countryCode) {
         link.addEventListener('click', function() {
             const selectedCountry = this.getAttribute('localization-country');
             setCookie('localization-country-code', selectedCountry, closeDays);
-            // La redirección ahora se manejará naturalmente por el atributo href del enlace
         });
     });
 
@@ -55,7 +54,11 @@ if (!countryCode) {
 } else {
     // Redirección automática si la cookie existe
     if (countryUrls[countryCode] && !window.location.href.startsWith(countryUrls[countryCode])) {
-        window.location.href = countryUrls[countryCode];
+        // Solo redirigir si el usuario está en un dominio completamente diferente
+        const baseDomain = countryUrls[countryCode].replace(/\/$/, ''); 
+        if (!window.location.href.startsWith(baseDomain)) {
+            window.location.href = countryUrls[countryCode];
+        }
     }
 
     // Permitir que el usuario cambie voluntariamente el país haciendo clic en los enlaces
