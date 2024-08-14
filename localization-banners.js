@@ -18,7 +18,7 @@ function getCookie(name) {
 }
 
 const banner = document.getElementById('localization-banner');
-const localizationCountries = banner.getAttribute('localization-country').split(',');
+const localizationCountries = banner.getAttribute('localization-country-banner').split(',');
 const globalNavbar = document.querySelector('.global-navbar');
 
 const closeDays = parseInt(banner.getAttribute('localization-close-days'), 10);
