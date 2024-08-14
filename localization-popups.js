@@ -1,3 +1,4 @@
+//Dentalink Redirection v.1.0.1
 const countryUrls = {
     co: "https://www.softwaredentalink.com/test-co",
     mx: "https://www.softwaredentalink.com/test-mx",
