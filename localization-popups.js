@@ -1,8 +1,8 @@
 const countryUrls = {
-    co: "https://dentalink-colombia.webflow.io/",
-    mx: "https://dentalink-mexico.webflow.io/",
-    cl: "https://dentalink-latam.webflow.io/?c=cl",
-    latam: "https://dentalink-latam.webflow.io/"
+    co: "https://www.softwaredentalink.com/test-co",
+    mx: "https://www.softwaredentalink.com/test-mx",
+    cl: "https://www.softwaredentalink.com/test-la?c=cl",
+    latam: "https://www.softwaredentalink.com/test-la"
 };
 
 function setCookie(name, value, days) {
@@ -54,11 +54,7 @@ if (!countryCode) {
 } else {
     // Redirección automática si la cookie existe
     if (countryUrls[countryCode] && !window.location.href.startsWith(countryUrls[countryCode])) {
-        // Solo redirigir si el usuario está en un dominio completamente diferente
-        const baseDomain = countryUrls[countryCode].replace(/\/$/, ''); 
-        if (!window.location.href.startsWith(baseDomain)) {
-            window.location.href = countryUrls[countryCode];
-        }
+        window.location.href = countryUrls[countryCode];
     }
 
     // Permitir que el usuario cambie voluntariamente el país haciendo clic en los enlaces
