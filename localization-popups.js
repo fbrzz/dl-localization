@@ -1,9 +1,9 @@
 //Dentalink Redirection v.1.0.1
 const countryUrls = {
-    co: "https://www.softwaredentalink.com/test-co",
-    mx: "https://www.softwaredentalink.com/test-mx",
-    cl: "https://www.softwaredentalink.com/test-la?c=cl",
-    latam: "https://www.softwaredentalink.com/test-la"
+    co: "https://www.softwaredentalink.com/co/",
+    mx: "https://www.softwaredentalink.com/mx/",
+    cl: "https://www.softwaredentalink.com/?c=cl",
+    latam: "https://www.softwaredentalink.com/"
 };
 
 function setCookie(name, value, days) {
@@ -24,18 +24,14 @@ function getCookie(name) {
     return null;
 }
 
-// Obtiene la cookie del código de país
 const countryCode = getCookie('localization-country-code');
 
 if (!countryCode) {
-    // Muestra el selector de país
     const selectorMain = document.getElementById('localization-selector-main');
     selectorMain.style.display = 'flex';
 
-    // Obtiene el número de días para la cookie
     const closeDays = parseInt(document.getElementById('localization-banner').getAttribute('localization-close-days'), 10);
 
-    // Asigna el evento a todos los enlaces con atributo "localization-country"
     document.querySelectorAll('[localization-country]').forEach(link => {
         link.addEventListener('click', function() {
             const selectedCountry = this.getAttribute('localization-country');
@@ -43,7 +39,6 @@ if (!countryCode) {
         });
     });
 
-    // Asigna el evento para cerrar el popup y guardar la cookie del país actual
     document.querySelectorAll('.localization-close-popup').forEach(button => {
         button.addEventListener('click', function() {
             const userCountry = Object.keys(countryUrls).find(code => window.location.href.startsWith(countryUrls[code])) || 'latam';
@@ -53,17 +48,14 @@ if (!countryCode) {
     });
 
 } else {
-    // Redirección automática si la cookie existe
     if (countryUrls[countryCode] && !window.location.href.startsWith(countryUrls[countryCode])) {
         window.location.href = countryUrls[countryCode];
     }
 
-    // Permitir que el usuario cambie voluntariamente el país haciendo clic en los enlaces
     document.querySelectorAll('[localization-country]').forEach(link => {
         link.addEventListener('click', function() {
             const selectedCountry = this.getAttribute('localization-country');
             setCookie('localization-country-code', selectedCountry, closeDays);
-            // No preventDefault, permitiendo que el enlace redirija como lo haría naturalmente
         });
     });
 }
