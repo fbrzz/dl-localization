@@ -26,6 +26,11 @@ function getCookie(name) {
 
 const countryCode = getCookie('localization-country-code');
 
-if (countryCode && countryUrls[countryCode] && !window.location.href.startsWith(countryUrls[countryCode])) {
-    window.location.href = countryUrls[countryCode];
+if (countryCode && countryUrls[countryCode]) {
+    const currentUrl = window.location.origin + window.location.pathname; // Ignora query params
+    const targetUrlBase = new URL(countryUrls[countryCode]).origin + new URL(countryUrls[countryCode]).pathname;
+
+    if (!currentUrl.startsWith(targetUrlBase)) {
+        window.location.href = countryUrls[countryCode];
+    }
 }
